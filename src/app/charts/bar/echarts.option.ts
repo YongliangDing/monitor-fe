@@ -1,5 +1,4 @@
-import * as echarts from 'echarts';
-export default function getOption(): echarts.EChartOption {
+export default function getOption() {
   return {
     title: {
       text: '',
@@ -33,26 +32,26 @@ export default function getOption(): echarts.EChartOption {
     legend: {
       data: ['PV', 'UV']
     },
-    xAxis: {
+    xAxis: [{
       type: 'category',
       data: null,
       axisPointer: {
         type: 'shadow'
       }
-    },
-    yAxis: {
+    }],
+    yAxis: [{
       type: 'value',
-    },
+    }],
     series: [
       {
         name: 'PV',
         type: 'bar',
-        data: []
+        data: null
       },
       {
         name: 'UV',
         type: 'bar',
-        data: []
+        data: null
       },
     ]
   };
