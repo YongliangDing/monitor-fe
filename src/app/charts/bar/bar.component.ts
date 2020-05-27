@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import * as echarts from 'echarts';
+import echarts from 'echarts';
 import getOption from './option.echarts';
 import { HttpService } from '../../http.service';
 import { Observable } from 'rxjs';

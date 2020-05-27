@@ -69,7 +69,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "monitor-fe:build"
+            "browserTarget": "monitor-fe:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
