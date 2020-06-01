@@ -1,10 +1,21 @@
-export interface ICountObj {
-  _id: string;
-  total: number;
+export interface INameValue {
+  value: number;
+  name: string;
 }
 
-export interface ICountDateObj {
-  date: string[];
-  pv: number[];
-  uv: number[];
+export interface IPieData {
+  legendData?: string[];
+  seriesData: INameValue[];
+}
+
+export interface IBLData {
+  legendData?: string[];
+  xAxisData: string[];
+  seriesData1: number[];
+  seriesData2?: number[];
+}
+
+export interface INestedPies {
+  innerData: INameValue[];
+  outerData: INameValue[];
 }

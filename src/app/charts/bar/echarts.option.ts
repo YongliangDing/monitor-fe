@@ -30,18 +30,18 @@ export default function getOption() {
       }
     },
     legend: {
-      data: ['PV', 'UV']
+      data: null
     },
-    xAxis: [{
+    xAxis: {
       type: 'category',
       data: null,
       axisPointer: {
         type: 'shadow'
       }
-    }],
-    yAxis: [{
+    },
+    yAxis: {
       type: 'value',
-    }],
+    },
     series: [
       {
         name: 'PV',

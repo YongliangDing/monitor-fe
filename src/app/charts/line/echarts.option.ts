@@ -17,7 +17,7 @@ export default function getOption() {
       }
     },
     legend: {
-      data: []
+      data: null
     },
     grid: {
       left: '3%',
@@ -25,20 +25,20 @@ export default function getOption() {
       bottom: '3%',
       containLabel: true
     },
-    xAxis: [{
+    xAxis: {
       type: 'category',
-      name: '小时',
+      name: '',
       boundaryGap: false,
       data: null
-    }],
-    yAxis: [{
+    },
+    yAxis: {
       type: 'value'
-    }],
+    },
     series: [
       {
         type: 'line',
-        stack: '总量',
-        name: '访问量',
+        stack: '',
+        name: '',
         data: null
       }
     ]

@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import * as echarts from 'echarts';
-import getOption from './echarts.option';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import echarts from 'echarts';
 import { Observable } from 'rxjs';
-import { ICountDateObj } from 'src/app/interface';
+import { IBLData } from 'src/app/interface';
 import macaronsTheme from '../macarons.theme';
+import getOption from './echarts.option';
 
 @Component({
   selector: 'app-bar',
@@ -13,7 +13,7 @@ import macaronsTheme from '../macarons.theme';
 export class BarComponent implements OnInit {
   @ViewChild('bar', { static: true }) bar: ElementRef;
   @Input() title: string;
-  @Input() barData: Observable<ICountDateObj> = null;
+  @Input() barData: Observable<IBLData> = null;
   barChart = null;
   option = getOption();
 
@@ -36,9 +36,10 @@ export class BarComponent implements OnInit {
 
   setDynamicOption(): void {
     this.barData.subscribe(res => {
-      this.option.xAxis[0].data = res.date;
-      this.option.series[0].data = res.pv;
-      this.option.series[1].data = res.uv;
+      this.option.legend.data = res.legendData;
+      this.option.xAxis.data = res.xAxisData;
+      this.option.series[0].data = res.seriesData1;
+      this.option.series[1].data = res.seriesData2;
       this.barChart.setOption(this.option);
     });
   }

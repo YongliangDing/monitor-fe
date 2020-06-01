@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import echarts from 'echarts';
 import getOption from './echarts.option';
 import { Observable } from 'rxjs';
-import { ICountObj } from 'src/app/interface';
+import { IBLData } from 'src/app/interface';
 import macaronsTheme from '../macarons.theme';
 
 @Component({
@@ -13,7 +13,7 @@ import macaronsTheme from '../macarons.theme';
 export class LineComponent implements OnInit {
   @ViewChild('line', { static: true }) line: ElementRef;
   @Input() title: string;
-  @Input() lineData: Observable<ICountObj[]> = null;
+  @Input() lineData: Observable<IBLData> = null;
   lineChart = null;
   option = getOption();
 
@@ -32,16 +32,15 @@ export class LineComponent implements OnInit {
 
   setStaticOption() {
     this.option.title.text = this.title;
+    this.option.xAxis[0].name = '小时';
+    this.option.series[0].stack = '总量';
+    this.option.series[0].name = '访问量';
   }
 
   setDynamicOption(): void {
     this.lineData.subscribe(res => {
-      this.option.xAxis[0].data = [];
-      this.option.series[0].data = [];
-      res.forEach(o => {
-        this.option.xAxis[0].data.push(o._id);
-        this.option.series[0].data.push(o.total);
-      });
+      this.option.xAxis.data = res.xAxisData;
+      this.option.series[0].data = res.seriesData1;
       this.lineChart.setOption(this.option);
     });
   }

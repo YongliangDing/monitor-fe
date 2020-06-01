@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import echarts from 'echarts';
-import getOption from './echarts.option';
 import { Observable } from 'rxjs';
-import { ICountObj } from 'src/app/interface';
+import { IPieData } from 'src/app/interface';
 import macaronsTheme from '../macarons.theme';
+import getOption from './echarts.option';
 
 @Component({
   selector: 'app-pie',
@@ -13,7 +13,7 @@ import macaronsTheme from '../macarons.theme';
 export class PieComponent implements OnInit {
   @ViewChild('pie', { static: true }) pie: ElementRef;
   @Input() title: string;
-  @Input() pieData: Observable<ICountObj[]>;
+  @Input() pieData: Observable<IPieData>;
   pieChart = null;
   option = getOption();
 
@@ -36,15 +36,8 @@ export class PieComponent implements OnInit {
 
   setDynamicOption(): void {
     this.pieData.subscribe(res => {
-      this.option.legend.data = [];
-      this.option.series[0].data = [];
-      res.forEach(o => {
-        this.option.legend.data.push(o._id);
-        this.option.series[0].data.push({
-          name: o._id,
-          value: o.total
-        });
-      });
+      this.option.legend.data = res.legendData;
+      this.option.series[0].data = res.seriesData;
       this.pieChart.setOption(this.option);
     });
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../http.service';
 import { Observable } from 'rxjs';
-import { ICountObj, ICountDateObj } from '../../interface';
+import { HttpService } from '../../http.service';
+import { IBLData, IPieData } from '../../interface';
 
 
 @Component({
@@ -13,9 +13,9 @@ export class WelcomeComponent implements OnInit {
   datesTitle = '站点日访问量';
   hoursTitle = '每小时访问量';
   stateTitle = '响应状态统计';
-  datesData: Observable<ICountDateObj> = null;
-  hoursData: Observable<ICountObj[]> = null;
-  stateData: Observable<ICountObj[]> = null;
+  datesData: Observable<IBLData> = null;
+  hoursData: Observable<IBLData> = null;
+  stateData: Observable<IPieData> = null;
   constructor(private http: HttpService) { }
 
   ngOnInit() {
