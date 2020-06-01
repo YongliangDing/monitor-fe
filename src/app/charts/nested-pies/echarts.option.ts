@@ -13,7 +13,7 @@ export default function getOption() {
     },
     series: [
       {
-        name: '访问来源',
+        name: '',
         type: 'pie',
         radius: [0, '45%'],
         center: ['50%', '58%'],
@@ -37,5 +37,5 @@ export default function getOption() {
         data: null
       }
     ]
-  }
+  };
 }

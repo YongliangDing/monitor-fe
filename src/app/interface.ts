@@ -19,3 +19,23 @@ export interface INestedPies {
   innerData: INameValue[];
   outerData: INameValue[];
 }
+
+export interface StrAndNum {
+  _id: string;
+  total: number;
+}
+
+interface NameVersion {
+  name?: string;
+  version?: string;
+}
+
+export interface CountByVersion {
+  _id: NameVersion;
+  total: number;
+}
+
+export interface INameVersion {
+  countByName: StrAndNum[];
+  countByVersion: CountByVersion[];
+}

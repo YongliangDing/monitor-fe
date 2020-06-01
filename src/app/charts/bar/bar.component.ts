@@ -3,16 +3,17 @@ import { Observable } from 'rxjs';
 import { IBLData } from 'src/app/interface';
 import { echarts } from '../macarons.theme';
 import getOption from './echarts.option';
+import elementResizeDetectorMaker from 'element-resize-detector';
 
 @Component({
   selector: 'app-bar',
   templateUrl: './bar.component.html',
-  styleUrls: ['./bar.component.css']
+  styleUrls: ['./bar.component.css'],
 })
 export class BarComponent implements OnInit {
   @ViewChild('bar', { static: true }) bar: ElementRef;
   @Input() title: string;
-  @Input() barData: Observable<IBLData> = null;
+  @Input() barData: Observable<IBLData>;
   barChart = null;
   option = getOption();
 
@@ -20,6 +21,7 @@ export class BarComponent implements OnInit {
 
   ngOnInit() {
     this.drawChart();
+    this.addResizeDetector();
   }
 
   drawChart(): void {
@@ -28,12 +30,17 @@ export class BarComponent implements OnInit {
     this.setDynamicOption();
   }
 
+  addResizeDetector(): void {
+    window.addEventListener('resize', () => this.barChart.resize());
+    elementResizeDetectorMaker().listenTo(this.bar.nativeElement, () => this.barChart.resize());
+  }
+
   setStaticOption() {
     this.option.title.text = this.title;
   }
 
   setDynamicOption(): void {
-    this.barData.subscribe(res => {
+    this.barData.subscribe((res) => {
       this.option.legend.data = res.legendData;
       this.option.xAxis.data = res.xAxisData;
       this.option.series[0].data = res.seriesData1;

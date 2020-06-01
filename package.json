@@ -21,6 +21,7 @@
     "@angular/router": "~9.1.9",
     "@antv/g2": "^3.5.11",
     "echarts": "^4.8.0",
+    "element-resize-detector": "^1.2.1",
     "ng-zorro-antd": "^9.1.2",
     "rxjs": "~6.5.5",
     "tslib": "^1.10.0",

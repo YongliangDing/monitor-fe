@@ -13,9 +13,11 @@ export class WelcomeComponent implements OnInit {
   datesTitle = '站点日访问量';
   hoursTitle = '每小时访问量';
   stateTitle = '响应状态统计';
+  uaOSTitle = '访问操作系统统计';
   datesData: Observable<IBLData> = null;
   hoursData: Observable<IBLData> = null;
   stateData: Observable<IPieData> = null;
+  usOSData: Observable<> = null;
   constructor(private http: HttpService) { }
 
   ngOnInit() {
