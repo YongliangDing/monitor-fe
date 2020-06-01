@@ -1,8 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import echarts from 'echarts';
 import { Observable } from 'rxjs';
 import { INestedPies } from 'src/app/interface';
-import macaronsTheme from '../macarons.theme';
+import { echarts } from '../macarons.theme';
 import getOption from './echarts.option';
 
 @Component({
@@ -24,7 +23,6 @@ export class NestedPiesComponent implements OnInit {
   }
 
   drawChart(): void {
-    echarts.registerTheme("macarons", macaronsTheme);
     this.piesChart = echarts.init(this.pies.nativeElement, "macarons");
     this.setStaticOption();
     this.setDynamicOption();

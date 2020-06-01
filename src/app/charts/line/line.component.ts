@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import echarts from 'echarts';
 import getOption from './echarts.option';
 import { Observable } from 'rxjs';
 import { IBLData } from 'src/app/interface';
-import macaronsTheme from '../macarons.theme';
+import { echarts } from '../macarons.theme';
 
 @Component({
   selector: 'app-line',
@@ -24,7 +23,6 @@ export class LineComponent implements OnInit {
   }
 
   drawChart(): void {
-    echarts.registerTheme('macarons', macaronsTheme);
     this.lineChart = echarts.init(this.line.nativeElement, 'macarons');
     this.setStaticOption();
     this.setDynamicOption();

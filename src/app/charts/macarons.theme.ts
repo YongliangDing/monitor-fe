@@ -1,4 +1,5 @@
-export default {
+import echarts from 'echarts';
+const macaronsTheme = {
   color: [
     '#2ec7c9',
     '#b6a2de',
@@ -515,3 +516,6 @@ export default {
     }
   }
 };
+
+echarts.registerTheme("macarons", macaronsTheme);
+export { echarts };
