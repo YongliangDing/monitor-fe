@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { INestedPies } from 'src/app/interface';
+import { IEchartsNestedPiesData } from 'src/app/interface';
 import { echarts } from '../macarons.theme';
 import getOption from './echarts.option';
 import elementResizeDetectorMaker from 'element-resize-detector';
@@ -12,8 +12,25 @@ import elementResizeDetectorMaker from 'element-resize-detector';
 })
 export class NestedPiesComponent implements OnInit {
   @ViewChild('nestedPies', { static: true }) pies: ElementRef;
-  @Input() title: string;
-  @Input() piesData: Observable<INestedPies>;
+  Ititle: string;
+  @Input()
+  set title(value: string) {
+    this.Ititle = value;
+    this.option.title.text = value;
+  }
+  get title(): string {
+    return this.Ititle;
+  }
+  IpiesData: Observable<IEchartsNestedPiesData> = null;
+  @Input()
+  set piesData(data: Observable<IEchartsNestedPiesData>) {
+    this.IpiesData = data;
+    this.setDynamicOption();
+  }
+  get piesData(): Observable<IEchartsNestedPiesData> {
+    return this.IpiesData;
+  }
+  isSpinning = false;
   piesChart = null;
   option = getOption();
 
@@ -41,13 +58,19 @@ export class NestedPiesComponent implements OnInit {
   }
 
   setDynamicOption(): void {
+    this.isSpinning = true;
     this.piesData.subscribe((res) => {
       this.option.series[0].data = [];
       this.option.series[1].data = [];
-      res.countByName.forEach(o => {
-        const osName = `${o._id.name} ${o._id.version || ''}`;
+      res.countByVersion.forEach(o => {
+        const osName = o._id ? `${o._id.name} ${o._id.version || ''}` : '';
         this.option.series[1].data.push({ value: o.total, name: osName });
       });
+      res.countByName.forEach(o => {
+        this.option.series[0].data.push({ value: o.total, name: o._id});
+      });
+      this.piesChart.setOption(this.option);
+      this.isSpinning = false;
     });
   }
 }

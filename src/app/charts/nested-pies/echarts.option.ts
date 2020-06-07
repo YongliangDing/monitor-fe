@@ -2,7 +2,6 @@ export default function getOption() {
   return {
     title: {
       text: '',
-      x: 'center',
       textStyle: {
         fontSize: 16
       }
@@ -11,11 +10,20 @@ export default function getOption() {
       trigger: 'item',
       formatter: '{a} <br/>{b} : {c} ({d}%)'
     },
+    toolbox: {
+      feature: {
+        saveAsImage: {
+          show: true,
+          backgroundColor: '#fff',
+          pixelRatio: 4
+        }
+      }
+    },
     series: [
       {
         name: '',
         type: 'pie',
-        radius: [0, '45%'],
+        radius: [0, '35%'],
         center: ['50%', '58%'],
         label: {
           normal: {
@@ -32,7 +40,7 @@ export default function getOption() {
       {
         name: '访问来源',
         type: 'pie',
-        radius: ['60%', '80%'],
+        radius: ['50%', '70%'],
         center: ['50%', '58%'],
         data: null
       }

@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import echarts from 'echarts';
 import { Observable } from 'rxjs';
-import { IPieData } from 'src/app/interface';
+import { IEchartsPieData } from 'src/app/interface';
 import getOption from './echarts.option';
 import elementResizeDetectorMaker from 'element-resize-detector';
 
@@ -12,8 +12,25 @@ import elementResizeDetectorMaker from 'element-resize-detector';
 })
 export class PieComponent implements OnInit {
   @ViewChild('pie', { static: true }) pie: ElementRef;
-  @Input() title: string;
-  @Input() pieData: Observable<IPieData>;
+  Ititle: string;
+  @Input()
+  set title(value: string) {
+    this.Ititle = value;
+    this.option.title.text = value;
+  }
+  get title(): string {
+    return this.Ititle;
+  }
+  IpieData: Observable<IEchartsPieData> = null;
+  @Input()
+  set pieData(data: Observable<IEchartsPieData>) {
+    this.IpieData = data;
+    this.setDynamicOption();
+  }
+  get pieData(): Observable<IEchartsPieData> {
+    return this.IpieData;
+  }
+  isSpinning = false;
   pieChart = null;
   option = getOption();
 
@@ -41,10 +58,12 @@ export class PieComponent implements OnInit {
   }
 
   setDynamicOption(): void {
+    this.isSpinning = true;
     this.pieData.subscribe((res) => {
       this.option.legend.data = res.legendData;
       this.option.series[0].data = res.seriesData;
       this.pieChart.setOption(this.option);
+      this.isSpinning = false;
     });
   }
 }

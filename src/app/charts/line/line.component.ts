@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import getOption from './echarts.option';
 import { Observable } from 'rxjs';
-import { IBLData } from 'src/app/interface';
+import { IEchartsCommonData } from 'src/app/interface';
 import { echarts } from '../macarons.theme';
 import elementResizeDetectorMaker from 'element-resize-detector';
 
@@ -12,8 +12,25 @@ import elementResizeDetectorMaker from 'element-resize-detector';
 })
 export class LineComponent implements OnInit {
   @ViewChild('line', { static: true }) line: ElementRef;
-  @Input() title: string;
-  @Input() lineData: Observable<IBLData>;
+  Ititle: string;
+  @Input()
+  set title(value: string) {
+    this.Ititle = value;
+    this.option.title.text = value;
+  }
+  get title(): string {
+    return this.Ititle;
+  }
+  IlineData: Observable<IEchartsCommonData> = null;
+  @Input()
+  set lineData(data: Observable<IEchartsCommonData>) {
+    this.IlineData = data;
+    this.setDynamicOption();
+  }
+  get lineData(): Observable<IEchartsCommonData> {
+    return this.IlineData;
+  }
+  isSpinning = false;
   lineChart = null;
   option = getOption();
 
@@ -38,15 +55,16 @@ export class LineComponent implements OnInit {
   setStaticOption() {
     this.option.title.text = this.title;
     this.option.xAxis.name = '小时';
-    this.option.series[0].stack = '总量';
-    this.option.series[0].name = '访问量';
+    // this.option.series[0].name = '访问量';
   }
 
   setDynamicOption(): void {
+    this.isSpinning = true;
     this.lineData.subscribe(res => {
       this.option.xAxis.data = res.xAxisData;
       this.option.series[0].data = res.seriesData1;
       this.lineChart.setOption(this.option);
+      this.isSpinning = false;
     });
   }
 }

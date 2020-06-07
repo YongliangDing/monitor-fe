@@ -13,7 +13,11 @@ export default function getOption() {
       feature: {
         magicType: { show: true, type: ['line', 'bar'] },
         restore: { show: true },
-        saveAsImage: { show: true }
+        saveAsImage: {
+          show: true,
+          backgroundColor: '#fff',
+          pixelRatio: 4
+        }
       }
     },
     legend: {
@@ -21,7 +25,7 @@ export default function getOption() {
     },
     grid: {
       left: '3%',
-      right: '4%',
+      right: '7%',
       bottom: '3%',
       containLabel: true
     },
@@ -37,7 +41,6 @@ export default function getOption() {
     series: [
       {
         type: 'line',
-        stack: '',
         name: '',
         data: null
       }

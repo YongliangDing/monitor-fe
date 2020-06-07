@@ -1,56 +1,49 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IEchartsCommonData } from 'src/app/interface';
-import { echarts } from '../macarons.theme';
 import getOption from './echarts.option';
+import { echarts } from '../macarons.theme';
 import elementResizeDetectorMaker from 'element-resize-detector';
-import { CommunicateService } from 'src/app/communicate.service';
 
 @Component({
-  selector: 'app-bar',
-  templateUrl: './bar.component.html',
-  styleUrls: ['./bar.component.css'],
+  selector: 'app-vertical-bar',
+  templateUrl: './vertical-bar.component.html',
+  styleUrls: ['./vertical-bar.component.css']
 })
-export class BarComponent implements OnInit {
-  @ViewChild('bar', { static: true }) bar: ElementRef;
-  @Input() title: string;
-  IbarData: Observable<IEchartsCommonData> = null;
+export class VerticalBarComponent implements OnInit {
+  @ViewChild('verticalBar', { static: true }) bar: ElementRef;
+  Ititle: string;
+  @Input()
+  set title(value: string) {
+    this.Ititle = value;
+    this.option.title.text = value;
+  }
+  get title(): string {
+    return this.Ititle;
+  }
+  IbarData: Observable<IEchartsCommonData>;
   @Input()
   set barData(data: Observable<IEchartsCommonData>) {
     this.IbarData = data;
     this.setDynamicOption();
   }
-
   get barData(): Observable<IEchartsCommonData> {
     return this.IbarData;
   }
   isSpinning = false;
   barChart = null;
   option = getOption();
+  constructor() { }
 
-  constructor(private communicate: CommunicateService) {}
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.drawChart();
     this.addResizeDetector();
   }
 
   drawChart(): void {
-    let lastParam = '';
     this.barChart = echarts.init(this.bar.nativeElement, 'macarons');
     this.setStaticOption();
     this.setDynamicOption();
-    this.barChart.on('click', param => {
-      if (lastParam === param.name) {
-        return;
-      } else {
-        lastParam = param.name;
-      }
-      this.communicate.sendMessage(JSON.stringify({
-        sender: 'barCmpt',
-        message: [new Date(param.name).setHours(0, 0, 0), new Date(param.name).setHours(23, 59, 59)]
-      }));
-    });
   }
 
   addResizeDetector(): void {
@@ -65,12 +58,11 @@ export class BarComponent implements OnInit {
   setDynamicOption(): void {
     this.isSpinning = true;
     this.barData.subscribe((res) => {
-      this.option.legend.data = res.legendData;
-      this.option.xAxis.data = res.xAxisData;
+      this.option.yAxis.data = res.xAxisData;
       this.option.series[0].data = res.seriesData1;
-      this.option.series[1].data = res.seriesData2;
       this.barChart.setOption(this.option);
       this.isSpinning = false;
     });
   }
+
 }

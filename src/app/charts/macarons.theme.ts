@@ -332,7 +332,7 @@ const macaronsTheme = {
       }
     },
     splitArea: {
-      show: true,
+      show: false,
       areaStyle: {
         color: [
           'rgba(250,250,250,0.3)',
@@ -369,7 +369,7 @@ const macaronsTheme = {
       }
     },
     splitArea: {
-      show: true,
+      show: false,
       areaStyle: {
         color: [
           'rgba(250,250,250,0.3)',
@@ -517,5 +517,6 @@ const macaronsTheme = {
   }
 };
 
-echarts.registerTheme("macarons", macaronsTheme);
+
+echarts.registerTheme('macarons', macaronsTheme);
 export { echarts };

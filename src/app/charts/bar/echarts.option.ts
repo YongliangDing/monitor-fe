@@ -8,8 +8,8 @@ export default function getOption() {
     },
     grid: {
       left: '3%',
-      right: '4%',
-      bottom: '3%',
+      right: '3%',
+      bottom: '4%',
       containLabel: true
     },
     tooltip: {
@@ -19,14 +19,18 @@ export default function getOption() {
         crossStyle: {
           color: '#999'
         }
-      }
+      },
     },
     toolbox: {
       feature: {
         dataView: { show: true, readOnly: true },
         magicType: { show: true, type: ['line', 'bar'] },
         restore: { show: true },
-        saveAsImage: { show: true }
+        saveAsImage: {
+          show: true,
+          backgroundColor: '#fff',
+          pixelRatio: 4
+        }
       }
     },
     legend: {
@@ -46,13 +50,32 @@ export default function getOption() {
       {
         name: 'PV',
         type: 'bar',
-        data: null
+        data: null,
+        barMaxWidth: '50%'
       },
       {
         name: 'UV',
         type: 'bar',
-        data: null
+        data: null,
+        barMaxWidth: '50%'
       },
-    ]
+    ],
+    dataZoom: [
+      {
+        type: 'slider',
+        orient: 'horizontal',
+        start: 0,
+        end: 100,
+        height: 12,
+        bottom: '1%',
+        minValueSpan: 2
+      },
+      {
+        type: 'inside',
+        orient: 'horizontal',
+        start: 0,
+        end: 100
+      }
+    ],
   };
 }

@@ -1,3 +1,20 @@
+export interface IEchartsCommonData {
+  xAxisData: string[] | number[];
+  legendData?: string[];
+  seriesData1: number[];
+  seriesData2?: number[];
+}
+
+export interface IPieSeriesData {
+  value: number;
+  name: string;
+}
+
+export interface IEchartsPieData {
+  legendData: string[] | number[];
+  seriesData: IPieSeriesData[];
+}
+
 export interface INameValue {
   value: number;
   name: string;
@@ -15,9 +32,14 @@ export interface IBLData {
   seriesData2?: number[];
 }
 
-export interface INestedPies {
-  innerData: INameValue[];
-  outerData: INameValue[];
+export interface IAggregateResult {
+  _id: string | number;
+  total: number;
+}
+
+export interface IEchartsNestedPiesData {
+  countByName: IAggregateResult[];
+  countByVersion: CountByVersion[];
 }
 
 export interface StrAndNum {

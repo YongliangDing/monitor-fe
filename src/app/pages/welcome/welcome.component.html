@@ -1,22 +1,47 @@
-
-<div nz-row>
-  <div nz-col nzSpan="12">
-    <app-bar [title]="datesTitle" [barData]="datesData"></app-bar>
+<div nz-row [nzGutter]="[16, 16]">
+  <div nz-col nzSpan="6">
+    <div class="chart-box">
+      <app-china-map [title]="mapTitle" [mapData]="mapData"></app-china-map>
+    </div>
   </div>
   <div nz-col nzSpan="12">
-    <app-line [title]="hoursTitle" [lineData]="hoursData"></app-line>
+    <div class="chart-box">
+      <app-bar [title]="datesTitle" [barData]="datesData"></app-bar>
+    </div>
   </div>
-</div>
-<div nz-row>
+  <div nz-col nzSpan="6">
+    <div class="chart-box">
+      <app-pie [title]="stateTitle" [pieData]="stateData"></app-pie>
+    </div>
+  </div>
+  <div nz-col nzSpan="6">
+    <div class="chart-box">
+      <app-nested-pies [title]="uaOSTitle" [piesData]="uaOSData"></app-nested-pies>
+    </div>
+  </div>
+  <div nz-col nzSpan="6">
+    <div class="chart-box">
+      <app-nested-pies [title]="uaBrowserTitle" [piesData]="uaBrowserData"></app-nested-pies>
+    </div>
+  </div>
   <div nz-col nzSpan="12">
-    <app-pie [title]="stateTitle" [pieData]="stateData"></app-pie>
+    <div class="chart-box">
+      <app-line [title]="hoursTitle" [lineData]="hoursData"></app-line>
+    </div>
   </div>
-  <div nz-col nzSpan="12">
-    <app-nested-pies [title]="uaOSTitle" [piesData]="uaOSData"></app-nested-pies>
+  <div nz-col nzSpan="24">
+    <div class="chart-box">
+      <nz-tabset>
+        <nz-tab nzTitle="用户">
+          <app-vertical-bar [title]="userTitle" [barData]="userData"></app-vertical-bar>
+        </nz-tab>
+        <nz-tab nzTitle="来源页">
+          <app-vertical-bar [title]="sourcePageTitle" [barData]="sourcePageData"></app-vertical-bar>
+        </nz-tab>
+        <nz-tab nzTitle="请求路径">
+          <app-vertical-bar [title]="requestPathTitle" [barData]="requestPathData"></app-vertical-bar>
+        </nz-tab>
+      </nz-tabset>
+    </div>
   </div>
-</div>
-<div nz-row>
-  <div nz-col nzSpan="8">col-8</div>
-  <div nz-col nzSpan="8">col-8</div>
-  <div nz-col nzSpan="8">col-8</div>
 </div>

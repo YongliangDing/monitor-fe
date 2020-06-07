@@ -10,8 +10,19 @@ export default function getOption() {
       trigger: 'item',
       formatter: '{a} <br/>{b}: {c} ({d}%)'
     },
+    toolbox: {
+      feature: {
+        saveAsImage: {
+          show: true,
+          backgroundColor: '#fff',
+          pixelRatio: 4
+        }
+      }
+    },
     legend: {
-      data: null
+      data: null,
+      left: 'center',
+      bottom: 'bottom'
     },
     series: [
       {
