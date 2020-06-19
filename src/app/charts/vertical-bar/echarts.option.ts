@@ -2,6 +2,7 @@ export default function getOption() {
   return {
     title: {
       text: '',
+      subtext: '',
     },
     tooltip: {
       trigger: 'axis',

@@ -13,14 +13,23 @@ import { Observable } from 'rxjs';
 })
 export class ChinaMapComponent implements OnInit {
   @ViewChild('map', { static: true }) map: ElementRef;
-  Ititle: string;
+  ITitle: string;
   @Input()
   set title(value: string) {
-    this.Ititle = value;
+    this.ITitle = value;
     this.option.title.text = value;
   }
   get title(): string {
-    return this.Ititle;
+    return this.ITitle;
+  }
+  ISubTitle: string;
+  @Input()
+  set subTitle(value: string) {
+    this.ISubTitle = value;
+    this.option.title.subtext = value;
+  }
+  get subTitle() {
+    return this.ISubTitle;
   }
   ImapData: Observable<IAggregateResult[]>;
   @Input()

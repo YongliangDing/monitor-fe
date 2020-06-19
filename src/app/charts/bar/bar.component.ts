@@ -14,6 +14,15 @@ import { CommunicateService } from 'src/app/communicate.service';
 export class BarComponent implements OnInit {
   @ViewChild('bar', { static: true }) bar: ElementRef;
   @Input() title: string;
+  ISubTitle: string;
+  @Input()
+  set subTitle(value: string) {
+    this.ISubTitle = value;
+    this.option.title.subtext = value;
+  }
+  get subTitle() {
+    return this.ISubTitle;
+  }
   IbarData: Observable<IEchartsCommonData> = null;
   @Input()
   set barData(data: Observable<IEchartsCommonData>) {

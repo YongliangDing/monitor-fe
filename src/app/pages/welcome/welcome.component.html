@@ -1,45 +1,45 @@
 <div nz-row [nzGutter]="[16, 16]">
   <div nz-col nzSpan="6">
     <div class="chart-box">
-      <app-china-map [title]="mapTitle" [mapData]="mapData"></app-china-map>
+      <app-china-map [title]="mapTitle" [subTitle]="mapSubTitle" [mapData]="mapData"></app-china-map>
     </div>
   </div>
   <div nz-col nzSpan="12">
     <div class="chart-box">
-      <app-bar [title]="datesTitle" [barData]="datesData"></app-bar>
+      <app-bar [title]="datesTitle" [subTitle]="datesSubTitle" [barData]="datesData"></app-bar>
     </div>
   </div>
   <div nz-col nzSpan="6">
     <div class="chart-box">
-      <app-pie [title]="stateTitle" [pieData]="stateData"></app-pie>
+      <app-pie [title]="stateTitle" [subTitle]="stateSubTitle" [pieData]="stateData"></app-pie>
     </div>
   </div>
   <div nz-col nzSpan="6">
     <div class="chart-box">
-      <app-nested-pies [title]="uaOSTitle" [piesData]="uaOSData"></app-nested-pies>
+      <app-nested-pies [title]="uaOSTitle" [subTitle]="uaOSSubTitle" [piesData]="uaOSData"></app-nested-pies>
     </div>
   </div>
   <div nz-col nzSpan="6">
     <div class="chart-box">
-      <app-nested-pies [title]="uaBrowserTitle" [piesData]="uaBrowserData"></app-nested-pies>
+      <app-nested-pies [title]="uaBrowserTitle" [subTitle]="uaBrowserSubTitle"  [piesData]="uaBrowserData"></app-nested-pies>
     </div>
   </div>
   <div nz-col nzSpan="12">
     <div class="chart-box">
-      <app-line [title]="hoursTitle" [lineData]="hoursData"></app-line>
+      <app-line [title]="hoursTitle" [subTitle]="hoursSubTitle" [lineData]="hoursData"></app-line>
     </div>
   </div>
   <div nz-col nzSpan="24">
     <div class="chart-box">
       <nz-tabset>
         <nz-tab nzTitle="用户">
-          <app-vertical-bar [title]="userTitle" [barData]="userData"></app-vertical-bar>
+          <app-vertical-bar [title]="userTitle" [subTitle]="userSubTitle" [barData]="userData"></app-vertical-bar>
         </nz-tab>
         <nz-tab nzTitle="来源页">
-          <app-vertical-bar [title]="sourcePageTitle" [barData]="sourcePageData"></app-vertical-bar>
+          <app-vertical-bar [title]="sourcePageTitle" [subTitle]="sourcePageSubTitle" [barData]="sourcePageData"></app-vertical-bar>
         </nz-tab>
         <nz-tab nzTitle="请求路径">
-          <app-vertical-bar [title]="requestPathTitle" [barData]="requestPathData"></app-vertical-bar>
+          <app-vertical-bar [title]="requestPathTitle" [subTitle]="requestPathSubTitle" [barData]="requestPathData"></app-vertical-bar>
         </nz-tab>
       </nz-tabset>
     </div>

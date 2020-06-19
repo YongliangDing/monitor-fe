@@ -12,14 +12,23 @@ import elementResizeDetectorMaker from 'element-resize-detector';
 })
 export class PieComponent implements OnInit {
   @ViewChild('pie', { static: true }) pie: ElementRef;
-  Ititle: string;
+  ITitle: string;
   @Input()
   set title(value: string) {
-    this.Ititle = value;
+    this.ITitle = value;
     this.option.title.text = value;
   }
   get title(): string {
-    return this.Ititle;
+    return this.ITitle;
+  }
+  ISubTitle: string;
+  @Input()
+  set subTitle(value: string) {
+    this.ISubTitle = value;
+    this.option.title.subtext = value;
+  }
+  get subTitle() {
+    return this.ISubTitle;
   }
   IpieData: Observable<IEchartsPieData> = null;
   @Input()

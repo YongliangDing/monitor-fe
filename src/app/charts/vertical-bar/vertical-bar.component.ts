@@ -12,14 +12,23 @@ import elementResizeDetectorMaker from 'element-resize-detector';
 })
 export class VerticalBarComponent implements OnInit {
   @ViewChild('verticalBar', { static: true }) bar: ElementRef;
-  Ititle: string;
+  ITitle: string;
   @Input()
   set title(value: string) {
-    this.Ititle = value;
+    this.ITitle = value;
     this.option.title.text = value;
   }
   get title(): string {
-    return this.Ititle;
+    return this.ITitle;
+  }
+  ISubTitle: string;
+  @Input()
+  set subTitle(value: string) {
+    this.ISubTitle = value;
+    this.option.title.subtext = value;
+  }
+  get subTitle() {
+    return this.ISubTitle;
   }
   IbarData: Observable<IEchartsCommonData>;
   @Input()
