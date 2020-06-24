@@ -5,16 +5,22 @@ export default function getOption() {
       subtext: '',
     },
     tooltip: {
-      trigger: 'item'
+      trigger: 'item',
     },
     toolbox: {
       feature: {
+        dataView: {
+          show: true,
+          optionToContent: null,
+          lang: null,
+          contentToOption: null,
+        },
         saveAsImage: {
           show: true,
           backgroundColor: '#fff',
-          pixelRatio: 4
-        }
-      }
+          pixelRatio: 4,
+        },
+      },
     },
     // 左侧小导航图标
     visualMap: {
@@ -22,46 +28,68 @@ export default function getOption() {
       x: 'left',
       y: 'bottom',
       splitList: [
-        { start: 200, end: 50000 }, { start: 100, end: 200 },
-        { start: 50, end: 100 }, { start: 20, end: 50 },
-        { start: 1, end: 20 }, { start: 0, end: 0 },
+        { start: 200, end: 50000 },
+        { start: 100, end: 200 },
+        { start: 50, end: 100 },
+        { start: 20, end: 50 },
+        { start: 1, end: 20 },
+        { start: 0, end: 0 },
       ],
-      color: ['#5475f5', '#9feaa5', '#85daef', '#74e2ca', '#e6ac53', '#9fb5ea']
+      color: ['#5475f5', '#9feaa5', '#85daef', '#74e2ca', '#e6ac53', '#9fb5ea'],
     },
 
     // 配置属性
-    series: [{
-      name: '数据',
-      type: 'map',
-      mapType: 'china',
-      roam: true,
-      label: {
-        normal: {
-          show: true
+    series: [
+      {
+        name: '',
+        type: 'map',
+        mapType: 'china',
+        roam: true,
+        label: {
+          normal: {
+            show: true,
+          },
+          emphasis: {
+            show: false,
+          },
         },
-        emphasis: {
-          show: false
-        }
+        data: [
+          { name: '北京', value: 0 },
+          { name: '天津', value: 0 },
+          { name: '上海', value: 0 },
+          { name: '重庆', value: 0 },
+          { name: '河北', value: 0 },
+          { name: '河南', value: 0 },
+          { name: '云南', value: 0 },
+          { name: '辽宁', value: 0 },
+          { name: '黑龙江', value: 0 },
+          { name: '湖南', value: 0 },
+          { name: '安徽', value: 0 },
+          { name: '山东', value: 0 },
+          { name: '新疆', value: 0 },
+          { name: '江苏', value: 0 },
+          { name: '浙江', value: 0 },
+          { name: '江西', value: 0 },
+          { name: '湖北', value: 0 },
+          { name: '广西', value: 0 },
+          { name: '甘肃', value: 0 },
+          { name: '山西', value: 0 },
+          { name: '内蒙古', value: 0 },
+          { name: '陕西', value: 0 },
+          { name: '吉林', value: 0 },
+          { name: '福建', value: 0 },
+          { name: '贵州', value: 0 },
+          { name: '广东', value: 0 },
+          { name: '青海', value: 0 },
+          { name: '西藏', value: 0 },
+          { name: '四川', value: 0 },
+          { name: '宁夏', value: 0 },
+          { name: '海南', value: 0 },
+          { name: '台湾', value: 0 },
+          { name: '香港', value: 0 },
+          { name: '澳门', value: 0 },
+        ],
       },
-      data: [
-        { name: '北京', value: 0 }, { name: '天津', value: 0 },
-        { name: '上海', value: 0 }, { name: '重庆', value: 0 },
-        { name: '河北', value: 0 }, { name: '河南', value: 0 },
-        { name: '云南', value: 0 }, { name: '辽宁', value: 0 },
-        { name: '黑龙江', value: 0 }, { name: '湖南', value: 0 },
-        { name: '安徽', value: 0 }, { name: '山东', value: 0 },
-        { name: '新疆', value: 0 }, { name: '江苏', value: 0 },
-        { name: '浙江', value: 0 }, { name: '江西', value: 0 },
-        { name: '湖北', value: 0 }, { name: '广西', value: 0 },
-        { name: '甘肃', value: 0 }, { name: '山西', value: 0 },
-        { name: '内蒙古', value: 0 }, { name: '陕西', value: 0 },
-        { name: '吉林', value: 0 }, { name: '福建', value: 0 },
-        { name: '贵州', value: 0 }, { name: '广东', value: 0 },
-        { name: '青海', value: 0 }, { name: '西藏', value: 0 },
-        { name: '四川', value: 0 }, { name: '宁夏', value: 0 },
-        { name: '海南', value: 0 }, { name: '台湾', value: 0 },
-        { name: '香港', value: 0 }, { name: '澳门', value: 0 }
-      ]
-    }]
+    ],
   };
 }

@@ -1,45 +1,99 @@
 <div nz-row [nzGutter]="[16, 16]">
   <div nz-col nzSpan="6">
     <div class="chart-box">
-      <app-china-map [title]="mapTitle" [subTitle]="mapSubTitle" [mapData]="mapData"></app-china-map>
+      <app-china-map
+        [title]="mapTitle"
+        [subTitle]="mapSubTitle"
+        [mapData]="mapData"
+        [seriesName]="[['访问量'], '省份']"
+      >
+      </app-china-map>
     </div>
   </div>
   <div nz-col nzSpan="12">
     <div class="chart-box">
-      <app-bar [title]="datesTitle" [subTitle]="datesSubTitle" [barData]="datesData"></app-bar>
+      <app-bar
+        [title]="datesTitle"
+        [subTitle]="datesSubTitle"
+        [barData]="datesData"
+        [seriesName]="[['PV', 'UV'], '日期']"
+      >
+      </app-bar>
     </div>
   </div>
   <div nz-col nzSpan="6">
     <div class="chart-box">
-      <app-pie [title]="stateTitle" [subTitle]="stateSubTitle" [pieData]="stateData"></app-pie>
+      <app-pie
+        [title]="stateTitle"
+        [subTitle]="stateSubTitle"
+        [pieData]="stateData"
+        [seriesName]="[['访问量'], '响应状态']"
+      >
+      </app-pie>
     </div>
   </div>
   <div nz-col nzSpan="6">
     <div class="chart-box">
-      <app-nested-pies [title]="uaOSTitle" [subTitle]="uaOSSubTitle" [piesData]="uaOSData"></app-nested-pies>
+      <app-nested-pies
+        [title]="uaOSTitle"
+        [subTitle]="uaOSSubTitle"
+        [piesData]="uaOSData"
+        [seriesName]="[['访问量'], '操作系统']"
+      >
+      </app-nested-pies>
     </div>
   </div>
   <div nz-col nzSpan="6">
     <div class="chart-box">
-      <app-nested-pies [title]="uaBrowserTitle" [subTitle]="uaBrowserSubTitle"  [piesData]="uaBrowserData"></app-nested-pies>
+      <app-nested-pies
+        [title]="uaBrowserTitle"
+        [subTitle]="uaBrowserSubTitle"
+        [piesData]="uaBrowserData"
+        [seriesName]="[['访问量'], '浏览器']"
+      >
+      </app-nested-pies>
     </div>
   </div>
   <div nz-col nzSpan="12">
     <div class="chart-box">
-      <app-line [title]="hoursTitle" [subTitle]="hoursSubTitle" [lineData]="hoursData"></app-line>
+      <app-line
+        [title]="hoursTitle"
+        [subTitle]="hoursSubTitle"
+        [lineData]="hoursData"
+        [seriesName]="[['访问量'], '时间']"
+      >
+      </app-line>
     </div>
   </div>
   <div nz-col nzSpan="24">
     <div class="chart-box">
       <nz-tabset>
         <nz-tab nzTitle="用户">
-          <app-vertical-bar [title]="userTitle" [subTitle]="userSubTitle" [barData]="userData"></app-vertical-bar>
+          <app-vertical-bar
+            [title]="userTitle"
+            [subTitle]="userSubTitle"
+            [barData]="userData"
+            [seriesName]="[['访问量'], 'IP']"
+          >
+          </app-vertical-bar>
         </nz-tab>
         <nz-tab nzTitle="来源页">
-          <app-vertical-bar [title]="sourcePageTitle" [subTitle]="sourcePageSubTitle" [barData]="sourcePageData"></app-vertical-bar>
+          <app-vertical-bar
+            [title]="sourcePageTitle"
+            [subTitle]="sourcePageSubTitle"
+            [barData]="sourcePageData"
+            [seriesName]="[['访问量'], '来源页']"
+          >
+          </app-vertical-bar>
         </nz-tab>
         <nz-tab nzTitle="请求路径">
-          <app-vertical-bar [title]="requestPathTitle" [subTitle]="requestPathSubTitle" [barData]="requestPathData"></app-vertical-bar>
+          <app-vertical-bar
+            [title]="requestPathTitle"
+            [subTitle]="requestPathSubTitle"
+            [barData]="requestPathData"
+            [seriesName]="[['访问量'], '请求路径']"
+          >
+          </app-vertical-bar>
         </nz-tab>
       </nz-tabset>
     </div>

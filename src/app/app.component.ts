@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommunicateService } from './communicate.service';
+import { CommunicateService } from 'src/app/services/communicate/communicate.service';
 import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
 
 @Component({
@@ -17,7 +17,6 @@ export class AppComponent {
   constructor(private communicate: CommunicateService) { }
   onChange(result: Array<Date>) {
     this.dateRange = result;
-    console.log(result);
     this.communicate.sendMessage(JSON.stringify({
       sender: 'datePicker',
       message: [result[0].setHours(0, 0 , 0), result[1].setHours(23, 59, 59)]

@@ -4,21 +4,27 @@ export default function getOption() {
       text: '',
       subtext: '',
       textStyle: {
-        fontSize: 16
-      }
+        fontSize: 16,
+      },
     },
     tooltip: {
       trigger: 'item',
-      formatter: '{a} <br/>{b} : {c} ({d}%)'
+      formatter: '{a} <br/>{b} : {c} ({d}%)',
     },
     toolbox: {
       feature: {
+        dataView: {
+          show: true,
+          optionToContent: null,
+          lang: null,
+          contentToOption: null,
+        },
         saveAsImage: {
           show: true,
           backgroundColor: '#fff',
-          pixelRatio: 4
-        }
-      }
+          pixelRatio: 4,
+        },
+      },
     },
     series: [
       {
@@ -28,23 +34,23 @@ export default function getOption() {
         center: ['50%', '58%'],
         label: {
           normal: {
-            position: 'inner'
-          }
+            position: 'inner',
+          },
         },
         labelLine: {
           normal: {
-            show: false
-          }
+            show: false,
+          },
         },
-        data: null
+        data: null,
       },
       {
         name: '访问来源',
         type: 'pie',
         radius: ['50%', '70%'],
         center: ['50%', '58%'],
-        data: null
-      }
-    ]
+        data: null,
+      },
+    ],
   };
 }

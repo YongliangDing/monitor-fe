@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpService } from '../../http.service';
+import { HttpService } from '../../services/http/http.service';
 import { IEchartsCommonData, IEchartsPieData, IEchartsNestedPiesData, IAggregateResult } from '../../interface';
-import { CommunicateService } from 'src/app/communicate.service';
+import { CommunicateService } from 'src/app/services/communicate/communicate.service';
 import io from 'socket.io-client';
 
 const today = new Date();
@@ -47,13 +47,31 @@ export class WelcomeComponent implements OnInit {
   constructor(private http: HttpService, private communicate: CommunicateService) { }
 
   ngOnInit() {
+    this.addSocketListener();
+    this.addMessageListener();
+    this.setOtherData();
+    this.setDatesData();
+  }
+
+  addSocketListener() {
     const socket = io('http://istintin.xyz:3000');
     socket.on('connect', () => {
       console.log('Connected');
     });
 
-    this.setOtherData();
-    this.setDatesData();
+    socket.on('update-log', () => {
+      const now = Date.now();
+      if (now >= datesCmpStartDate && now <= datesCmpEndDate) {
+        this.setDatesData(datesCmpStartDate, datesCmpEndDate);
+      }
+
+      if (now >= otherCmpStartDate && now <= otherCmpEndDate) {
+        this.setOtherData(otherCmpStartDate, otherCmpEndDate);
+      }
+    });
+  }
+
+  addMessageListener() {
     this.communicate.getMessage().subscribe(m => {
       const mesObj = JSON.parse(m);
       if (mesObj.sender === 'datePicker') {
@@ -65,17 +83,6 @@ export class WelcomeComponent implements OnInit {
         this.setOtherData(mesObj.message[0], mesObj.message[1]);
         otherCmpStartDate = mesObj.message[0];
         otherCmpEndDate = mesObj.message[1];
-      }
-    });
-
-    socket.on('update-log', () => {
-      const now = Date.now();
-      if (now >= datesCmpStartDate && now <= datesCmpEndDate) {
-        this.setDatesData(datesCmpStartDate, datesCmpEndDate);
-      }
-
-      if (now >= otherCmpStartDate && now <= otherCmpEndDate) {
-        this.setOtherData(otherCmpStartDate, otherCmpEndDate);
       }
     });
   }

@@ -7,38 +7,45 @@ export default function getOption() {
     tooltip: {
       trigger: 'axis',
       axisPointer: {
-        type: 'shadow'
-      }
+        type: 'shadow',
+      },
     },
     toolbox: {
       feature: {
+        dataView: {
+          show: true,
+          optionToContent: null,
+          lang: null,
+          contentToOption: null,
+        },
         saveAsImage: {
           show: true,
           backgroundColor: '#fff',
-          pixelRatio: 4
-        }
-      }
+          pixelRatio: 4,
+        },
+      },
     },
     grid: {
       left: '3%',
       right: '4%',
       bottom: '3%',
-      containLabel: true
+      containLabel: true,
     },
     xAxis: {
       type: 'value',
-      boundaryGap: [0, 0.01]
+      boundaryGap: [0, 0.01],
     },
     yAxis: {
       type: 'category',
-      data: null
+      data: null,
     },
     series: [
       {
+        name: '',
         type: 'bar',
         data: null,
-        barMaxWidth: '50%'
-      }
+        barMaxWidth: '50%',
+      },
     ],
     dataZoom: [
       {
@@ -47,14 +54,14 @@ export default function getOption() {
         start: 0,
         end: 100,
         width: 12,
-        minValueSpan: 5
+        minValueSpan: 5,
       },
       {
         type: 'inside',
         orient: 'vertical',
         start: 0,
-        end: 100
-      }
+        end: 100,
+      },
     ],
   };
 }
