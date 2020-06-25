@@ -1,0 +1,51 @@
+<div>
+  <form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your username!">
+        <nz-input-group nzPrefixIcon="user">
+          <input formControlName="userName" nz-input placeholder="Username" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your Password!">
+        <nz-input-group nzPrefixIcon="lock">
+          <input formControlName="password" nz-input type="password" placeholder="Password" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary" [disabled]="!validateForm.valid">Log in</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <nz-table #borderedTable nzBordered nzShowSizeChanger [nzData]="dataSet" [nzTotal]="length"
+    [nzFrontPagination]="false" (nzPageIndexChange)="setPageData()" (nzPageSizeChange)="changeSize()">
+    <caption>{{ caption }}</caption>
+    <thead>
+      <tr>
+        <th>时间</th>
+        <th>详情</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let access of borderedTable.data trackBy:trackById">
+        <td>
+          {{getTime(access.accessTime)}}
+        </td>
+        <td>
+          <span><b>IP:</b>{{access.ipAddress}}</span>
+          <span><b>AccessTime:</b>{{access.accessTime}}</span>
+          <span><b>RequestMethod:</b>{{access.requestMethod}}</span>
+          <span><b>RequestPath:</b>{{access.requestPath}}</span>
+          <span><b>Protocol:</b>{{access.protocol}}</span>
+          <span><b>RequestState:</b>{{access.requestState}}</span>
+          <span><b>PageSize:</b>{{access.pageSize}}</span>
+          <span><b>SourcePage:</b>{{access.sourcePage}}</span>
+          <span><b>UserAgent:</b>{{access.userAgent._ua}}</span>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

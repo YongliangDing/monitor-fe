@@ -9,7 +9,7 @@ const proxyAPI = '/api';
 })
 export class HttpService {
   constructor(private http: HttpClient) { }
-  getChartsData(url: string, option = {}): Observable<any> {
+  getData(url: string, option = {}): Observable<any> {
     return this.http.get<any>(proxyAPI + url, option);
   }
 }

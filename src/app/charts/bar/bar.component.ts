@@ -81,7 +81,7 @@ export class BarComponent implements OnInit, OnChanges {
 
   setDynamicOption(): void {
     this.isSpinning = true;
-    this.barData.subscribe((res) => {
+    this.barData.subscribe(res => {
       this.option.xAxis.data = res.xAxisData;
       this.option.series[0].data = res.seriesData1;
       this.option.series[1].data = res.seriesData2;

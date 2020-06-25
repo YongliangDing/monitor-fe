@@ -1,0 +1,13 @@
+tr td:first-child {
+  width: 120px;
+  text-align: center;
+}
+
+td>span {
+  display: inline-block;
+  padding-right: 14px;
+}
+
+td b {
+  color: cadetblue;
+}

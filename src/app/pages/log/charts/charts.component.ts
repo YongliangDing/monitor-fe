@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpService } from '../../services/http/http.service';
-import { IEchartsCommonData, IEchartsPieData, IEchartsNestedPiesData, IAggregateResult } from '../../interface';
+import { HttpService } from 'src/app/services/http/http.service';
+import { IEchartsCommonData, IEchartsPieData, IEchartsNestedPiesData, IAggregateResult } from '../../../interface';
 import { CommunicateService } from 'src/app/services/communicate/communicate.service';
 import io from 'socket.io-client';
+import { UtilsService } from 'src/app/services/utills/utils.service';
 
 const today = new Date();
 let datesCmpStartDate = new Date('2020-6-11').setHours(0, 0, 0);
@@ -12,11 +13,11 @@ let otherCmpStartDate = today.setHours(0, 0, 0);
 let otherCmpEndDate = today.setHours(23, 59, 59);
 
 @Component({
-  selector: 'app-welcome',
-  templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.css'],
+  selector: 'app-charts',
+  templateUrl: './charts.component.html',
+  styleUrls: ['./charts.component.css'],
 })
-export class WelcomeComponent implements OnInit {
+export class ChartsComponent implements OnInit {
   datesTitle = '站点日访问量';
   datesSubTitle = '';
   hoursTitle = '每小时访问量';
@@ -44,7 +45,12 @@ export class WelcomeComponent implements OnInit {
   userData: Observable<IEchartsCommonData> = null;
   sourcePageData: Observable<IEchartsCommonData> = null;
   requestPathData: Observable<IEchartsCommonData> = null;
-  constructor(private http: HttpService, private communicate: CommunicateService) { }
+
+  constructor(
+    private http: HttpService,
+    private communicate: CommunicateService,
+    private utils: UtilsService
+  ) { }
 
   ngOnInit() {
     this.addSocketListener();
@@ -103,19 +109,19 @@ export class WelcomeComponent implements OnInit {
       startDate,
       endDate
     } : {};
-    this.datesData = this.http.getChartsData('/count/date', {
+    this.datesData = this.http.getData('/count/date', {
       params
     });
     this.datesSubTitle = (startDate && endDate) ?
-      `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}至${new Date(endDate).toLocaleDateString().replace(/\//g, '-')}` :
+      `${this.utils.formatDate(startDate)}至${this.utils.formatDate(endDate)}` :
       `2020-06-11至${today.toLocaleDateString().replace(/\//g, '-')}`;
   }
 
   setHoursData(startDate: number, endDate: number) {
     this.hoursSubTitle = endDate - startDate > 24 * 60 * 60 * 1000 ?
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}至${new Date(endDate).toLocaleDateString().replace(/\//g, '-')}` :
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}`;
-    this.hoursData = this.http.getChartsData(
+    `${this.utils.formatDate(startDate)}至${this.utils.formatDate(endDate)}` :
+    `${this.utils.formatDate(startDate)}`;
+    this.hoursData = this.http.getData(
       '/count/hour', {
       params: {
         startDate,
@@ -127,9 +133,9 @@ export class WelcomeComponent implements OnInit {
 
   setStateData(startDate: number, endDate: number) {
     this.stateSubTitle = endDate - startDate > 24 * 60 * 60 * 1000 ?
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}至${new Date(endDate).toLocaleDateString().replace(/\//g, '-')}` :
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}`;
-    this.stateData = this.http.getChartsData(
+    `${this.utils.formatDate(startDate)}至${this.utils.formatDate(endDate)}` :
+    `${this.utils.formatDate(startDate)}`;
+    this.stateData = this.http.getData(
       '/count/state', {
       params: {
         startDate,
@@ -142,9 +148,9 @@ export class WelcomeComponent implements OnInit {
   setUaOSData(startDate: number, endDate: number) {
     this.uaOSSubTitle = endDate - startDate > 24 * 60 * 60 * 1000 ?
     // tslint:disable-next-line:max-line-length
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}至${new Date(endDate).toLocaleDateString().replace(/\//g, '-')}` :
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}`;
-    this.uaOSData = this.http.getChartsData('/count/os', {
+    `${this.utils.formatDate(startDate)}至${this.utils.formatDate(endDate)}` :
+    `${this.utils.formatDate(startDate)}`;
+    this.uaOSData = this.http.getData('/count/os', {
       params: {
         startDate,
         endDate
@@ -154,9 +160,9 @@ export class WelcomeComponent implements OnInit {
 
   setBrowserData(startDate: number, endDate: number) {
     this.uaBrowserSubTitle = endDate - startDate > 24 * 60 * 60 * 1000 ?
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}至${new Date(endDate).toLocaleDateString().replace(/\//g, '-')}` :
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}`;
-    this.uaBrowserData = this.http.getChartsData(
+    `${this.utils.formatDate(startDate)}至${this.utils.formatDate(endDate)}` :
+    `${this.utils.formatDate(startDate)}`;
+    this.uaBrowserData = this.http.getData(
       '/count/browser', {
         params: {
           startDate, endDate
@@ -167,9 +173,9 @@ export class WelcomeComponent implements OnInit {
 
   setMapData(startDate: number, endDate: number) {
     this.mapSubTitle = endDate - startDate > 24 * 60 * 60 * 1000 ?
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}至${new Date(endDate).toLocaleDateString().replace(/\//g, '-')}` :
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}`;
-    this.mapData = this.http.getChartsData('/count/map', {
+    `${this.utils.formatDate(startDate)}至${this.utils.formatDate(endDate)}` :
+    `${this.utils.formatDate(startDate)}`;
+    this.mapData = this.http.getData('/count/map', {
       params: {
         startDate,
         endDate
@@ -179,9 +185,9 @@ export class WelcomeComponent implements OnInit {
 
   setUserData(startDate: number, endDate: number) {
     this.userSubTitle = endDate - startDate > 24 * 60 * 60 * 1000 ?
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}至${new Date(endDate).toLocaleDateString().replace(/\//g, '-')}` :
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}`;
-    this.userData = this.http.getChartsData(
+    `${this.utils.formatDate(startDate)}至${this.utils.formatDate(endDate)}` :
+    `${this.utils.formatDate(startDate)}`;
+    this.userData = this.http.getData(
       '/ranking/user', {
         params: {
           startDate,
@@ -193,9 +199,9 @@ export class WelcomeComponent implements OnInit {
 
   setSourcePageData(startDate: number, endDate: number) {
     this.sourcePageSubTitle = endDate - startDate > 24 * 60 * 60 * 1000 ?
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}至${new Date(endDate).toLocaleDateString().replace(/\//g, '-')}` :
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}`;
-    this.sourcePageData = this.http.getChartsData(
+    `${this.utils.formatDate(startDate)}至${this.utils.formatDate(endDate)}` :
+    `${this.utils.formatDate(startDate)}`;
+    this.sourcePageData = this.http.getData(
       '/ranking/source-page', {
         params: {
           startDate,
@@ -207,9 +213,9 @@ export class WelcomeComponent implements OnInit {
 
   setRequestPathData(startDate: number, endDate: number) {
     this.requestPathSubTitle = endDate - startDate > 24 * 60 * 60 * 1000 ?
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}至${new Date(endDate).toLocaleDateString().replace(/\//g, '-')}` :
-    `${new Date(startDate).toLocaleDateString().replace(/\//g, '-')}`;
-    this.requestPathData = this.http.getChartsData(
+    `${this.utils.formatDate(startDate)}至${this.utils.formatDate(endDate)}` :
+    `${this.utils.formatDate(startDate)}`;
+    this.requestPathData = this.http.getData(
       'ranking/request-path', {
         params: {
           startDate,

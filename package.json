@@ -19,7 +19,6 @@
     "@angular/platform-browser": "~9.1.11",
     "@angular/platform-browser-dynamic": "~9.1.11",
     "@angular/router": "~9.1.11",
-    "@antv/g2": "^3.5.11",
     "@types/socket.io-client": "^1.4.33",
     "echarts": "^4.8.0",
     "element-resize-detector": "^1.2.1",
