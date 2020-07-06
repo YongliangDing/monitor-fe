@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpService } from 'src/app/services/http/http.service';
-import { IEchartsCommonData, IEchartsPieData, IEchartsNestedPiesData, IAggregateResult } from '../../../interface';
-import { CommunicateService } from 'src/app/services/communicate/communicate.service';
 import io from 'socket.io-client';
+import { CommunicateService } from 'src/app/services/communicate/communicate.service';
+import { HttpService } from 'src/app/services/http/http.service';
 import { UtilsService } from 'src/app/services/utills/utils.service';
+import { IAggregateResult, IEchartsCommonData, IEchartsNestedPiesData, IEchartsPieData } from '../../../interface';
 
 const today = new Date();
 let datesCmpStartDate = new Date('2020-6-11').setHours(0, 0, 0);
@@ -60,7 +60,7 @@ export class ChartsComponent implements OnInit {
   }
 
   addSocketListener() {
-    const socket = io('http://istintin.xyz:3000');
+    const socket = io('ws://istintin.xyz:3000');
     socket.on('connect', () => {
       console.log('Connected');
     });
@@ -80,12 +80,12 @@ export class ChartsComponent implements OnInit {
   addMessageListener() {
     this.communicate.getMessage().subscribe(m => {
       const mesObj = JSON.parse(m);
-      if (mesObj.sender === 'datePicker') {
+      if (mesObj.sender === 'datePicker' && !!mesObj.message) {
         this.setOtherData(mesObj.message[0], mesObj.message[1]);
         this.setDatesData(mesObj.message[0], mesObj.message[1]);
         datesCmpStartDate = mesObj.message[0];
         datesCmpEndDate = mesObj.message[1];
-      } else if (mesObj.sender === 'barCmpt') {
+      } else if (mesObj.sender === 'barCmpt' && !!mesObj.message) {
         this.setOtherData(mesObj.message[0], mesObj.message[1]);
         otherCmpStartDate = mesObj.message[0];
         otherCmpEndDate = mesObj.message[1];
@@ -221,7 +221,7 @@ export class ChartsComponent implements OnInit {
           startDate,
           endDate
         }
-    }
+      }
     );
   }
 }

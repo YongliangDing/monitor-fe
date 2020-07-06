@@ -22,6 +22,9 @@ export class AppComponent {
 
   onChange(result: Array<Date>) {
     this.dateRange = result;
+    if (result.length !== 2) {
+      return;
+    }
     this.communicate.sendMessage(
       JSON.stringify({
         sender: "datePicker",

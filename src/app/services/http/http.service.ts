@@ -10,6 +10,9 @@ const proxyAPI = '/api';
 export class HttpService {
   constructor(private http: HttpClient) { }
   getData(url: string, option = {}): Observable<any> {
-    return this.http.get<any>(proxyAPI + url, option);
+    return this.http.get(proxyAPI + url, option);
+  }
+  postData(url: string, data: any, option = {}): Observable<any> {
+    return this.http.post(proxyAPI + url, data, option);
   }
 }

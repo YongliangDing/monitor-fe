@@ -1,0 +1,151 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="log-form">
+  <div nz-row [nzGutter]="[24, 8]">
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nzFor="ipAddress">
+          IP
+        </nz-form-label>
+        <nz-form-control nzErrorTip="Please input IP!">
+          <input formControlName="ipAddress" nz-input />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nzFor="requestMethod">
+          Method
+        </nz-form-label>
+        <nz-form-control nzErrorTip="Please input method!">
+          <nz-select nzShowSearch nzAllowClear formControlName="requestMethod">
+            <nz-option nzLabel="GET" nzValue="GET"></nz-option>
+            <nz-option nzLabel="POST" nzValue="POST"></nz-option>
+            <nz-option nzLabel="HEAD" nzValue="HEAD"></nz-option>
+            <nz-option nzLabel="PUT" nzValue="PUT"></nz-option>
+            <nz-option nzLabel="DELETE" nzValue="DELETE"></nz-option>
+            <nz-option nzLabel="OPTIONS" nzValue="OPTIONS"></nz-option>
+            <nz-option nzLabel="TRACE" nzValue="TRACE"></nz-option>
+            <nz-option nzLabel="CONNECT" nzValue="CONNECT"></nz-option>
+            <nz-option nzLabel="LINK" nzValue="LINK"></nz-option>
+            <nz-option nzLabel="UNLINK" nzValue="UNLINK"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nzFor="protocol">
+          Protocol
+        </nz-form-label>
+        <nz-form-control nzErrorTip="Please input protocol!">
+          <nz-select nzAllowClear formControlName="protocol">
+            <nz-option nzLabel="HTTP/1.0" nzValue="HTTP/1.0"></nz-option>
+            <nz-option nzLabel="HTTP/1.1" nzValue="HTTP/1.1"></nz-option>
+            <nz-option nzLabel="HTTP/2.0" nzValue="HTTP/1.1"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nzFor="requestState">
+          State
+        </nz-form-label>
+        <nz-form-control nzErrorTip="Please input state!">
+          <nz-select nzAllowClear nzShowSearch formControlName="requestState">
+            <nz-option nzLabel="100" nzValue="100"></nz-option>
+            <nz-option nzLabel="101" nzValue="101"></nz-option>
+            <nz-option nzLabel="200" nzValue="200"></nz-option>
+            <nz-option nzLabel="201" nzValue="201"></nz-option>
+            <nz-option nzLabel="202" nzValue="202"></nz-option>
+            <nz-option nzLabel="203" nzValue="203"></nz-option>
+            <nz-option nzLabel="204" nzValue="204"></nz-option>
+            <nz-option nzLabel="205" nzValue="205"></nz-option>
+            <nz-option nzLabel="206" nzValue="206"></nz-option>
+            <nz-option nzLabel="300" nzValue="300"></nz-option>
+            <nz-option nzLabel="301" nzValue="301"></nz-option>
+            <nz-option nzLabel="302" nzValue="302"></nz-option>
+            <nz-option nzLabel="303" nzValue="303"></nz-option>
+            <nz-option nzLabel="304" nzValue="304"></nz-option>
+            <nz-option nzLabel="305" nzValue="305"></nz-option>
+            <nz-option nzLabel="307" nzValue="307"></nz-option>
+            <nz-option nzLabel="400" nzValue="400"></nz-option>
+            <nz-option nzLabel="401" nzValue="401"></nz-option>
+            <nz-option nzLabel="402" nzValue="402"></nz-option>
+            <nz-option nzLabel="403" nzValue="403"></nz-option>
+            <nz-option nzLabel="404" nzValue="404"></nz-option>
+            <nz-option nzLabel="405" nzValue="405"></nz-option>
+            <nz-option nzLabel="406" nzValue="406"></nz-option>
+            <nz-option nzLabel="407" nzValue="407"></nz-option>
+            <nz-option nzLabel="408" nzValue="408"></nz-option>
+            <nz-option nzLabel="409" nzValue="409"></nz-option>
+            <nz-option nzLabel="410" nzValue="410"></nz-option>
+            <nz-option nzLabel="411" nzValue="411"></nz-option>
+            <nz-option nzLabel="412" nzValue="412"></nz-option>
+            <nz-option nzLabel="413" nzValue="413"></nz-option>
+            <nz-option nzLabel="414" nzValue="414"></nz-option>
+            <nz-option nzLabel="415" nzValue="415"></nz-option>
+            <nz-option nzLabel="416" nzValue="416"></nz-option>
+            <nz-option nzLabel="417" nzValue="417"></nz-option>
+            <nz-option nzLabel="500" nzValue="500"></nz-option>
+            <nz-option nzLabel="501" nzValue="501"></nz-option>
+            <nz-option nzLabel="502" nzValue="502"></nz-option>
+            <nz-option nzLabel="503" nzValue="503"></nz-option>
+            <nz-option nzLabel="504" nzValue="504"></nz-option>
+            <nz-option nzLabel="505" nzValue="505"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nzFor="os">
+          OS
+        </nz-form-label>
+        <nz-form-control nzErrorTip="Please input os!">
+          <nz-select nzAllowClear formControlName="os">
+            <nz-option nzLabel="Linux" nzValue="Linux"></nz-option>
+            <nz-option nzLabel="Windows" nzValue="Windows"></nz-option>
+            <nz-option nzLabel="macOS" nzValue="macOS"></nz-option>
+            <nz-option nzLabel="Android" nzValue="Android"></nz-option>
+            <nz-option nzLabel="IOS" nzValue="IOS"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label nzFor="browser">
+          Browser
+        </nz-form-label>
+        <nz-form-control nzErrorTip="Please input browser!">
+          <nz-select nzAllowClear formControlName="browser">
+            <nz-option nzLabel="Chrome" nzValue="Chrome"></nz-option>
+            <nz-option nzLabel="Firefox" nzValue="Firefox"></nz-option>
+            <nz-option nzLabel="Mozilla" nzValue="Mozilla"></nz-option>
+            <nz-option nzLabel="Opera" nzValue="Opera"></nz-option>
+            <nz-option nzLabel="Internet Explorer" nzValue="Internet Explorer"></nz-option>
+            <nz-option nzLabel="Android Browser" nzValue="Android Browser"></nz-option>
+            <nz-option nzLabel="Safari" nzValue="Safari"></nz-option>
+            <nz-option nzLabel="masscan" nzValue="masscan"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row nzJustify="end" style="margin: 8px 0;">
+    <div nz-col>
+      <nz-form-item nzJustify="end">
+        <nz-form-control>
+          <nz-button-group>
+            <button nz-button nzType="primary" [disabled]="!validateForm.valid">
+              搜索
+            </button>
+            <button nz-button nzType="danger" (click)="resetForm($event)">
+              重置
+            </button>
+          </nz-button-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+</form>

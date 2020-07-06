@@ -1,9 +1,9 @@
-import { HttpService } from 'src/app/services/http/http.service';
+import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { NzTableComponent } from 'ng-zorro-antd';
+import { ILogForm } from 'src/app/interface';
 import { CommunicateService } from 'src/app/services/communicate/communicate.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpService } from 'src/app/services/http/http.service';
 import { UtilsService } from 'src/app/services/utills/utils.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface IAccess {
   _id: string;
@@ -19,48 +19,40 @@ interface IAccess {
 }
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css'],
+  selector: "app-table",
+  templateUrl: "./table.component.html",
+  styleUrls: ["./table.component.css"],
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, OnChanges {
   dataSet: IAccess[] = [];
-  @ViewChild('borderedTable', { static: true }) borderedTable: NzTableComponent;
+  @Input() formData: ILogForm;
+  @ViewChild("borderedTable", { static: true }) borderedTable: NzTableComponent;
   length: number;
   caption = `数据访问详情`;
-  startDate = new Date('2020-06-11').setHours(23, 59, 59);
+  startDate = new Date("2020-06-11").setHours(23, 59, 59);
   endDate = new Date().setHours(23, 59, 59);
   pageSize = 10;
-  validateForm!: FormGroup;
+  isSpinning = false;
 
   constructor(
     private http: HttpService,
     private communicate: CommunicateService,
-    private utils: UtilsService,
-    private fb: FormBuilder
+    private utils: UtilsService
   ) {}
 
   ngOnInit() {
-    this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [true],
-    });
     this.setPageData();
     this.addMessageListener();
   }
 
-  submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
-    }
+  ngOnChanges() {
+    this.setPageData();
   }
 
   addMessageListener() {
     this.communicate.getMessage().subscribe((m) => {
       const mesObj = JSON.parse(m);
-      if (mesObj.sender === 'datePicker') {
+      if (mesObj.sender === "datePicker" && !!mesObj.message) {
         this.startDate = mesObj.message[0];
         this.endDate = mesObj.message[1];
         this.setPageData();
@@ -74,20 +66,20 @@ export class TableComponent implements OnInit {
         ? `${this.utils.formatDate(this.startDate)}数据访问详情`
         : `${this.utils.formatDate(this.startDate)}至${this.utils.formatDate(
             this.endDate
-          )}数据访问详情`;
+        )}数据访问详情`;
+    this.isSpinning = true;
     this.http
-      .getData('/detail', {
-        params: {
+      .postData("/detail", {
           startDate: this.startDate,
           endDate: this.endDate,
           pageIndex: this.borderedTable.nzPageIndex,
           size: this.borderedTable.nzPageSize,
-        },
+          formData: this.formData,
       })
       .subscribe((res) => {
         this.dataSet = res.onePage;
         this.length = res.length;
-        console.log(this.dataSet);
+        this.isSpinning = false;
       });
   }
 

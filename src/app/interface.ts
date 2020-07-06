@@ -61,3 +61,12 @@ export interface INameVersion {
   countByName: StrAndNum[];
   countByVersion: CountByVersion[];
 }
+
+export interface ILogForm {
+  ipAddress: string;
+  requestMethod: string;
+  protocol: string;
+  requestState: string;
+  os: string;
+  browser: string;
+}

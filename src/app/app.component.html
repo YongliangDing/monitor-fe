@@ -8,14 +8,14 @@
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [nzTitle]="isCollapsed ? '数据视图' : ''" nzMatchRouter>
+      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [nzTooltipTitle]="isCollapsed ? '数据视图' : ''" nzMatchRouter>
         <a routerLink="/log/charts">
           <i nz-icon nzType="bar-chart" nzTheme="outline"></i>
           <span>数据视图</span>
         </a>
       </li>
-      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [nzTitle]="isCollapsed ? '数据表格' : ''" nzMatchRouter>
-        <a routerLink="/log/table">
+      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [nzTooltipTitle]="isCollapsed ? '数据表格' : ''" nzMatchRouter>
+        <a routerLink="/log/detail">
           <i nz-icon nzType="table" nzTheme="outline"></i>
           <span>数据表格</span>
         </a>

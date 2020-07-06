@@ -8,8 +8,13 @@ import { ChartsModule } from 'src/app/charts/charts.module';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzFormModule } from 'ng-zorro-antd/form';
-
+import { NzInputModule } from "ng-zorro-antd/input";
+import { NzButtonModule } from "ng-zorro-antd/button";
+import { NzSelectModule } from "ng-zorro-antd/select";
+import { FormComponent } from './form/form.component';
+import { DetailComponent } from './detail/detail.component';
 
 @NgModule({
   imports: [
@@ -17,12 +22,21 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     ChartsModule,
     NzTableModule,
     NzGridModule,
+    NzSpinModule,
     NzTabsModule,
     NzFormModule,
+    NzButtonModule,
+    NzInputModule,
+    NzSelectModule,
     CommonModule,
     ReactiveFormsModule,
   ],
-  declarations: [ChartsComponent, TableComponent],
-  exports: [ChartsComponent, TableComponent],
+  declarations: [
+    ChartsComponent,
+    TableComponent,
+    FormComponent,
+    DetailComponent,
+  ],
+  exports: [ChartsComponent, DetailComponent],
 })
 export class LogModule {}
