@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, OnChanges, SimpleChange } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IEchartsCommonData } from 'src/app/interface';
 import { echarts } from '../macarons.theme';
@@ -47,7 +47,7 @@ export class BarComponent implements OnInit, OnChanges {
 
   addChartEventListener() {
     let lastParam = '';
-    this.barChart.on('click', (param) => {
+    this.barChart.on('click', (param: { name: string;}) => {
       if (lastParam === param.name) {
         return;
       }
@@ -75,16 +75,14 @@ export class BarComponent implements OnInit, OnChanges {
   setStaticOption() {
     this.option.title.text = this.title;
     this.option.title.subtext = this.subTitle;
-    this.option.series[0].name = this.seriesName[0][0];
-    this.option.series[1].name = this.seriesName[0][1];
+    this.option.series.forEach((s, index) => s.name = this.seriesName[0][index]);
   }
 
   setDynamicOption(): void {
     this.isSpinning = true;
     this.barData.subscribe(res => {
       this.option.xAxis.data = res.xAxisData;
-      this.option.series[0].data = res.seriesData1;
-      this.option.series[1].data = res.seriesData2;
+      res.seriesData.forEach((element, index) => this.option.series[index].data = element);
       this.barChart.setOption(this.option);
       this.isSpinning = false;
     });
@@ -105,7 +103,6 @@ export class BarComponent implements OnInit, OnChanges {
       );
     };
     this.option.toolbox.feature.dataView.optionToContent = (opt) => {
-      console.log(opt);
       const axisData = opt.xAxis[0].data;
       const series = opt.series;
       let table = `<table style='width:100%;text-align:center;' border='1' cellspacing='0'>

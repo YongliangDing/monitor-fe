@@ -36,8 +36,8 @@ export class NestedPiesComponent implements OnInit, OnChanges {
   drawChart(): void {
     this.piesChart = echarts.init(this.pies.nativeElement, 'macarons');
     this.setStaticOption();
-    this.initDataView();
     this.setDynamicOption();
+    this.initDataView();
   }
 
   addResizeDetector(): void {
@@ -56,15 +56,14 @@ export class NestedPiesComponent implements OnInit, OnChanges {
   setDynamicOption(): void {
     this.isSpinning = true;
     this.piesData.subscribe((res) => {
-      this.option.series[0].data = [];
-      this.option.series[1].data = [];
-      res.countByVersion.forEach((o) => {
-        const osName = o._id ? `${o._id.name} ${o._id.version || ''}` : '';
-        this.option.series[1].data.push({ value: o.total, name: osName });
-      });
-      res.countByName.forEach((o) => {
-        this.option.series[0].data.push({ value: o.total, name: o._id });
-      });
+      this.option.series[0].data = res.countByName.map(o => ({
+        value: o.total,
+        name: o._id
+      }));
+      this.option.series[1].data = res.countByVersion.map(o => ({
+        value: o.total,
+        name: o._id ? `${o._id.name} ${o._id.version || ''}` : ''
+      }));
       this.piesChart.setOption(this.option);
       this.isSpinning = false;
     });

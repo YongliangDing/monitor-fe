@@ -1,9 +1,30 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { NzDatePickerModule, NzSliderModule, NzLayoutModule, NzIconModule, NzMenuModule, NzToolTipModule } from 'ng-zorro-antd';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
+import { IconsProviderModule } from './icons-provider.module';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        BrowserModule,
+        AppRoutingModule,
+        IconsProviderModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        NzDatePickerModule,
+        NzSliderModule,
+        NzLayoutModule,
+        NzIconModule,
+        NzMenuModule,
+        NzToolTipModule,
+      ],
       declarations: [
         AppComponent
       ],
@@ -14,18 +35,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'monitor-fe'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('monitor-fe');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('monitor-fe app is running!');
   });
 });

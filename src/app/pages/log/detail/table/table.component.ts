@@ -19,17 +19,17 @@ interface IAccess {
 }
 
 @Component({
-  selector: "app-table",
-  templateUrl: "./table.component.html",
-  styleUrls: ["./table.component.css"],
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.css'],
 })
 export class TableComponent implements OnInit, OnChanges {
   dataSet: IAccess[] = [];
   @Input() formData: ILogForm;
-  @ViewChild("borderedTable", { static: true }) borderedTable: NzTableComponent;
+  @ViewChild('borderedTable', { static: true }) borderedTable: NzTableComponent;
   length: number;
   caption = `数据访问详情`;
-  startDate = new Date("2020-06-11").setHours(23, 59, 59);
+  startDate = new Date('2020-06-11').setHours(23, 59, 59);
   endDate = new Date().setHours(23, 59, 59);
   pageSize = 10;
   isSpinning = false;
@@ -52,7 +52,7 @@ export class TableComponent implements OnInit, OnChanges {
   addMessageListener() {
     this.communicate.getMessage().subscribe((m) => {
       const mesObj = JSON.parse(m);
-      if (mesObj.sender === "datePicker" && !!mesObj.message) {
+      if (mesObj.sender === 'datePicker' && !!mesObj.message) {
         this.startDate = mesObj.message[0];
         this.endDate = mesObj.message[1];
         this.setPageData();
@@ -69,7 +69,7 @@ export class TableComponent implements OnInit, OnChanges {
         )}数据访问详情`;
     this.isSpinning = true;
     this.http
-      .postData("/detail", {
+      .postData('/detail', {
           startDate: this.startDate,
           endDate: this.endDate,
           pageIndex: this.borderedTable.nzPageIndex,
@@ -88,8 +88,12 @@ export class TableComponent implements OnInit, OnChanges {
     this.setPageData();
   }
 
-  getTime(str: string): string {
+  getDate(str: string): string {
     return this.utils.formatDate(str);
+  }
+
+  getTime(t: string | number): string {
+    return (new Date(t)).toLocaleTimeString();
   }
 
   trackById(index: string, onePage: any): string {

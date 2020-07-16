@@ -11,11 +11,11 @@
     <tbody>
       <tr *ngFor="let access of borderedTable.data trackBy:trackById">
         <td>
-          {{getTime(access.accessTime)}}
+          {{getDate(access.accessTime)}}
         </td>
         <td>
           <span><b>IP:</b>{{access.ipAddress}}</span>
-          <span><b>AccessTime:</b>{{access.accessTime}}</span>
+          <span><b>AccessTime:</b>{{getTime(access.accessTime)}}</span>
           <span><b>RequestMethod:</b>{{access.requestMethod}}</span>
           <span><b>RequestPath:</b>{{access.requestPath}}</span>
           <span><b>Protocol:</b>{{access.protocol}}</span>

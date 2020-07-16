@@ -1,8 +1,7 @@
 export interface IEchartsCommonData {
-  xAxisData: string[] | number[];
+  xAxisData: string[];
   legendData?: string[];
-  seriesData1: number[];
-  seriesData2?: number[];
+  seriesData: number[][];
 }
 
 export interface IPieSeriesData {
@@ -11,7 +10,7 @@ export interface IPieSeriesData {
 }
 
 export interface IEchartsPieData {
-  legendData: string[] | number[];
+  legendData: string[];
   seriesData: IPieSeriesData[];
 }
 
@@ -33,7 +32,7 @@ export interface IBLData {
 }
 
 export interface IAggregateResult {
-  _id: string | number;
+  _id: string;
   total: number;
 }
 

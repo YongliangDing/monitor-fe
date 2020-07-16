@@ -23,6 +23,7 @@
     "echarts": "^4.8.0",
     "element-resize-detector": "^1.2.1",
     "ng-zorro-antd": "^9.2.2",
+    "ngx-countup": "^7.3.1",
     "rxjs": "~6.5.5",
     "socket.io-client": "^2.3.0",
     "table2excel": "^1.0.4",

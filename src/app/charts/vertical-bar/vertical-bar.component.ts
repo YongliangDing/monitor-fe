@@ -57,7 +57,7 @@ export class VerticalBarComponent implements OnInit, OnChanges {
     this.isSpinning = true;
     this.barData.subscribe((res) => {
       this.option.yAxis.data = res.xAxisData;
-      this.option.series[0].data = res.seriesData1;
+      res.seriesData.forEach((element, index) => this.option.series[index].data = element);
       this.barChart.setOption(this.option);
       this.isSpinning = false;
     });

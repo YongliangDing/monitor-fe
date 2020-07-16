@@ -50,6 +50,7 @@ export default function getOption() {
         type: 'line',
         name: '',
         data: null,
+        areaStyle: {},
       },
     ],
   };

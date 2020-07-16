@@ -1,27 +1,17 @@
 <div nz-row [nzGutter]="[16, 16]">
-  <div nz-col nzSpan="6">
-    <div class="chart-box">
-      <app-china-map
-        [title]="mapTitle"
-        [subTitle]="mapSubTitle"
-        [mapData]="mapData"
-        [seriesName]="[['访问量'], '省份']"
-      >
-      </app-china-map>
-    </div>
-  </div>
-  <div nz-col nzSpan="12">
-    <div class="chart-box">
-      <app-bar
+  <div nz-col nzSpan="24">
+    <div class="chart-box" nz-row [nzGutter]="[16, 0]">
+      <app-bar nz-col nzSpan="20"
         [title]="datesTitle"
         [subTitle]="datesSubTitle"
         [barData]="datesData"
         [seriesName]="[['PV', 'UV'], '日期']"
       >
       </app-bar>
+      <app-statistics nz-col nzSpan="4"></app-statistics>
     </div>
   </div>
-  <div nz-col nzSpan="6">
+  <div nz-col nzSpan="8">
     <div class="chart-box">
       <app-pie
         [title]="stateTitle"
@@ -32,7 +22,19 @@
       </app-pie>
     </div>
   </div>
-  <div nz-col nzSpan="6">
+  <div nz-col nzSpan="16">
+    <div class="chart-box">
+      <app-line [title]="hoursTitle" [subTitle]="hoursSubTitle" [lineData]="hoursData" [seriesName]="[['访问量'], '时间']">
+      </app-line>
+    </div>
+  </div>
+  <div nz-col nzSpan="8">
+    <div class="chart-box">
+      <app-china-map [title]="mapTitle" [subTitle]="mapSubTitle" [mapData]="mapData" [seriesName]="[['访问量'], '省份']">
+      </app-china-map>
+    </div>
+  </div>
+  <div nz-col nzSpan="8">
     <div class="chart-box">
       <app-nested-pies
         [title]="uaOSTitle"
@@ -43,7 +45,7 @@
       </app-nested-pies>
     </div>
   </div>
-  <div nz-col nzSpan="6">
+  <div nz-col nzSpan="8">
     <div class="chart-box">
       <app-nested-pies
         [title]="uaBrowserTitle"
@@ -52,17 +54,6 @@
         [seriesName]="[['访问量'], '浏览器']"
       >
       </app-nested-pies>
-    </div>
-  </div>
-  <div nz-col nzSpan="12">
-    <div class="chart-box">
-      <app-line
-        [title]="hoursTitle"
-        [subTitle]="hoursSubTitle"
-        [lineData]="hoursData"
-        [seriesName]="[['访问量'], '时间']"
-      >
-      </app-line>
     </div>
   </div>
   <div nz-col nzSpan="24">

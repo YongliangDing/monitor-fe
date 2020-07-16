@@ -36,8 +36,8 @@ export class LineComponent implements OnInit, OnChanges {
   drawChart(): void {
     this.lineChart = echarts.init(this.line.nativeElement, 'macarons');
     this.setStaticOption();
-    this.initDataView();
-    this.setDynamicOption();
+    this.setDynamicOption()
+    this.initDataView();;
   }
 
   addResizeDetector(): void {
@@ -50,7 +50,6 @@ export class LineComponent implements OnInit, OnChanges {
   setStaticOption() {
     this.option.title.text = this.title;
     this.option.title.subtext = this.subTitle;
-    // this.option.xAxis.name = this.seriesName[1];
     this.option.series[0].name = this.seriesName[0][0];
   }
 
@@ -58,7 +57,7 @@ export class LineComponent implements OnInit, OnChanges {
     this.isSpinning = true;
     this.lineData.subscribe(res => {
       this.option.xAxis.data = res.xAxisData;
-      this.option.series[0].data = res.seriesData1;
+      res.seriesData.forEach((element, index) => this.option.series[index].data = element);
       this.lineChart.setOption(this.option);
       this.isSpinning = false;
     });
